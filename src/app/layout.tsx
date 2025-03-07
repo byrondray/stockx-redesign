@@ -90,8 +90,57 @@ export default function RootLayout({
               </Link>
             </h1>
 
-            {/* Search button (mobile) */}
-            <ul role='list' className='flex'>
+            {/* Right Icons Section */}
+            <ul role='list' className='flex items-center space-x-2'>
+              {/* Favorites Icon */}
+              <li>
+                <button className='p-2 text-white'>
+                  <svg
+                    className='w-7 h-7'
+                    focusable='false'
+                    viewBox='0 0 50 50'
+                  >
+                    <path
+                      fill='currentColor'
+                      d='M33.5 11.3C37.5 11.3 40.8 14.6 40.8 18.6C40.8 19.5 40.6 20.4 40.3 21.2L39.9 22C38.1 25.6 30.5 33.1 25 38C19.5 33.1 11.9 25.7 10.1 22L9.7 21.1C9.4 20.3 9.2 19.4 9.2 18.5C9.2 14.5 12.5 11.2 16.5 11.2C18.9 11.2 21 12.7 23.1 15.9L25 18.8L26.9 16C29 12.9 31.2 11.3 33.5 11.3ZM33.5 9C29.8 9 27 11.8 25 14.7C23 11.6 20.2 9 16.5 9C11.3 9 7 13.3 7 18.5C7 19.7 7.2 20.8 7.6 21.9C9.3 27.5 25 41 25 41C25 41 40.7 27.5 42.3 22C42.7 20.9 42.9 19.8 42.9 18.6C43 13.3 38.7 9 33.5 9Z'
+                    ></path>
+                  </svg>
+                </button>
+              </li>
+
+              {/* Notification Icon */}
+              <li>
+                <button className='p-2 text-white'>
+                  <svg
+                    className='w-7 h-7'
+                    focusable='false'
+                    viewBox='0 0 50 50'
+                  >
+                    <path
+                      d='M28.7998 39.1C28.7998 41.3 26.9998 43.1 24.7998 43.1C22.5998 43.1 20.7998 41.3 20.7998 39.1H28.7998Z'
+                      fill='currentColor'
+                    ></path>
+                    <path
+                      d='M25.988 6.99458L23.688 7.00537L23.7129 12.3054L26.0129 12.2946L25.988 6.99458Z'
+                      fill='currentColor'
+                    ></path>
+                    <path
+                      d='M35.4 26.1C34.6 26 33.8 25.8 33.1 25.4C33.3 28 33.8 31.8 35.4 34.5H14.2C16.9 30 16.7 22.9 16.7 22.6C16.7 17.5 20.4 13.3 24.9 13.3C26.6 13.3 28.2 13.9 29.5 14.9C29.8 14.2 30.3 13.6 30.8 13.1C29.1 11.8 27.1 11.1 24.9 11.1C19.2 11.1 14.5 16.3 14.5 22.7C14.5 22.8 14.8 31.6 11.2 34.8L9 36.8H41.3L38.7 34.8C36.5 33.3 35.7 29.3 35.4 26.1Z'
+                      fill='currentColor'
+                    ></path>
+                    <path
+                      d='M36.3999 24C39.4375 24 41.8999 21.5376 41.8999 18.5C41.8999 15.4624 39.4375 13 36.3999 13C33.3623 13 30.8999 15.4624 30.8999 18.5C30.8999 21.5376 33.3623 24 36.3999 24Z'
+                      fill='#08a05c'
+                    ></path>
+                    <path
+                      d='M36.3999 13C39.3999 13 41.8999 15.5 41.8999 18.5C41.8999 21.5 39.3999 24 36.3999 24C33.3999 24 30.8999 21.5 30.8999 18.5C30.8999 15.5 33.3999 13 36.3999 13Z'
+                      fill='#08a05c'
+                    ></path>
+                  </svg>
+                </button>
+              </li>
+
+              {/* Search button */}
               <li>
                 <button
                   className='p-2 text-white'
@@ -116,9 +165,10 @@ export default function RootLayout({
             <div
               id='mobile-navigation'
               aria-hidden={!mobileNavOpen}
-              className={`fixed inset-0 z-50 bg-gray-900 text-white ${
+              className={`fixed inset-0 z-50 text-white ${
                 mobileNavOpen ? 'block' : 'hidden'
               }`}
+              style={{ backgroundColor: '#1a1a1a' }} // Fixed dark background color
             >
               <div className='flex justify-between items-center p-4 border-b border-gray-800'>
                 <button
@@ -181,7 +231,7 @@ export default function RootLayout({
                       <NavItem label='Apparel' hasChildren />
                       <NavItem label='Accessories' hasChildren />
                       <NavItem label='More Categories' hasChildren />
-                      <NavItem href='/dp/deals' label='Deals' highlight />
+                      <NavItem href='/dp/deals' label='Deals' />
                       <NavItem
                         href='/stockx-gift-card'
                         label='Gift Cards'
