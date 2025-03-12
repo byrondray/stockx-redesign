@@ -84,7 +84,7 @@ export default function RootLayout({
             </Link>
 
             <button
-              onClick={() => handleTabChange('search')}
+              onClick={() => handleTabChange('')}
               className={`flex items-center justify-center h-full ${
                 activeTab === 'search' ? 'text-green-500' : 'text-gray-400'
               }`}
@@ -101,7 +101,7 @@ export default function RootLayout({
             </button>
 
             <button
-              onClick={() => handleTabChange('notifications')}
+              onClick={() => handleTabChange('')}
               className={`flex items-center justify-center h-full ${
                 activeTab === 'notifications'
                   ? 'text-green-500'
@@ -120,7 +120,7 @@ export default function RootLayout({
             </button>
 
             <button
-              onClick={() => handleTabChange('favorites')}
+              onClick={() => handleTabChange('')}
               className={`flex items-center justify-center h-full ${
                 activeTab === 'favorites' ? 'text-green-500' : 'text-gray-400'
               }`}

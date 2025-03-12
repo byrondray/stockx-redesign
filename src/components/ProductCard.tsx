@@ -25,7 +25,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
         className='relative h-full bg-white rounded-lg overflow-hidden flex flex-col'
       >
         <Link
-          href={product.href}
+          href={``}
           aria-label='Product Tile Link'
           className='block outline-offset-[-1px]'
         >
