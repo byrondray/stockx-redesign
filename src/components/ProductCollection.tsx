@@ -1,96 +1,47 @@
 import { ProductCard } from './ProductCard';
 
-export default function ProductCollection() {
-  const products = [
-    {
-      id: 'adidas-yeezy-boost-350-v2-beluga-reflective',
-      href: '/adidas-yeezy-boost-350-v2-beluga-reflective',
-      title: 'adidas Yeezy Boost 350 V2 Beluga Reflective',
-      imgSrc:
-        'https://images.stockx.com/images/adidas-Yeezy-Boost-350-V2-Beluga-Reflective-Product.jpg?fit=fill&bg=FFFFFF&w=140&h=75&q=60&dpr=1&trim=color&updated_at=1738193358',
-      category: 'sneakers',
-      lowestAsk: 'CA$214',
-      lastSale: '',
-      xpressShip: true,
-    },
-    {
-      id: '2020-21-panini-prizm-basketball-blaster-box',
-      href: '/2020-21-panini-prizm-basketball-blaster-box',
-      title: '2020-21 Panini Prizm Basketball Blaster Box',
-      imgSrc:
-        'https://images.stockx.com/images/2020-21-Panini-Prizm-Basketball-Blaster-Box.jpg?fit=fill&bg=FFFFFF&w=140&h=75&q=60&dpr=1&trim=color&updated_at=1617301601',
-      category: 'trading-cards',
-      lowestAsk: 'CA$85',
-      lastSale: 'CA$78',
-      xpressShip: false,
-    },
-    {
-      id: 'adidas-ultra-boost-40-dna-white',
-      href: '/adidas-ultra-boost-40-dna-white',
-      title: 'adidas Ultra Boost 4.0 DNA White',
-      imgSrc:
-        'https://images.stockx.com/images/adidas-Ultra-Boost-40-DNA-White-Product.jpg?fit=fill&bg=FFFFFF&w=140&h=75&q=60&dpr=1&trim=color&updated_at=1738193358',
-      category: 'sneakers',
-      lowestAsk: 'CA$227',
-      lastSale: 'CA$293',
-      xpressShip: false,
-    },
-    {
-      id: 'adidas-yeezy-boost-350-v2-mx-dark-salt',
-      href: '/adidas-yeezy-boost-350-v2-mx-dark-salt',
-      title: 'adidas Yeezy Boost 350 V2 MX Dark Salt',
-      imgSrc:
-        'https://images.stockx.com/images/adidas-Yeezy-Boost-350-V2-MX-Dark-Salt-Product.jpg?fit=fill&bg=FFFFFF&w=140&h=75&q=60&dpr=1&trim=color&updated_at=1738193358',
-      category: 'sneakers',
-      lowestAsk: 'CA$182',
-      lastSale: '',
-      xpressShip: true,
-    },
-    {
-      id: 'on-running-cloudrunner-2-frost-white',
-      href: '/on-running-cloudrunner-2-frost-white',
-      title: 'On Running Cloudrunner 2 Frost White',
-      imgSrc:
-        'https://images.stockx.com/images/On-Running-Cloudrunner-2-Frost-White-Product.jpg?fit=fill&bg=FFFFFF&w=140&h=75&q=60&dpr=1&trim=color&updated_at=1739394686',
-      category: 'sneakers',
-      lowestAsk: 'CA$240',
-      lastSale: '',
-      xpressShip: true,
-    },
-    {
-      id: 'air-jordan-1-retro-high-og-sp-union-la-chicago-shadow',
-      href: '/air-jordan-1-retro-high-og-sp-union-la-chicago-shadow',
-      title: 'Jordan 1 Retro High OG SP Union LA Chicago Shadow',
-      imgSrc:
-        'https://images.stockx.com/images/Air-Jordan-1-Retro-High-OG-SP-Union-LA-Chicago-Shadow-Product.jpg?fit=fill&bg=FFFFFF&w=140&h=75&q=60&dpr=1&trim=color&updated_at=1740684367',
-      category: 'sneakers',
-      lowestAsk: 'CA$748',
-      lastSale: '',
-      xpressShip: true,
-    },
-  ];
+type Product = {
+  category: string;
+  href: string;
+  title: string;
+  imgSrc: string;
+  lowestAsk: string;
+  xpressShip: boolean;
+  lastSale: string;
+  id: string;
+};
+interface ProductCollectionProps {
+  products: Product[];
+  title?: string;
+  className?: string;
+}
 
+export default function ProductCollection({
+  products,
+  title,
+  className = '',
+}: ProductCollectionProps) {
   return (
     <section
       data-testid='HomeSection-PRODUCT_COLLECTION'
       id='section-product_collection-1'
-      className='py-8 px-4 bg-black text-white'
+      className={` px-4 bg-white text-black ${className}`}
     >
       <div
         data-component='ProductRow'
-        data-collection-name='Recently Viewed'
+        data-collection-name={title}
         className='max-w-screen-xl mx-auto'
       >
         <div
           data-testid='dynamic-row-header'
           className='flex items-center justify-between mb-4'
         >
-          <h2 className='text-xl font-bold text-white'>
-            Recently Viewed
+          <h2 className='text-xl font-bold text-black'>
+            {title}
             <button
               type='button'
-              className='inline-flex items-center ml-1 text-white'
-              aria-label='Recently Viewed'
+              className='inline-flex items-center ml-1 text-black'
+              aria-label={title}
               id='info-tooltip'
               aria-haspopup='dialog'
               aria-expanded='false'
@@ -100,13 +51,10 @@ export default function ProductCollection() {
           </h2>
         </div>
 
-        {/* Scrollable container */}
         <div className='relative'>
-          {/* Shadow indicators for horizontal scroll */}
           <div className='absolute left-0 top-0 bottom-0 w-12  z-10 pointer-events-none'></div>
           <div className='absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none'></div>
 
-          {/* Scrollable product list */}
           <ul
             data-component='SmartGridRow'
             className='flex overflow-x-auto pb-4 gap-4 scrollbar-hide snap-x'
