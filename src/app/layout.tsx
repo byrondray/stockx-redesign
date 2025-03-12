@@ -37,7 +37,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-black flex flex-col h-screen`}
       >
-        {/* Search Overlay */}
         {searchOpen && (
           <div className='fixed inset-0 bg-white z-20 p-4'>
             <div className='flex items-center mb-4'>
@@ -61,31 +60,29 @@ export default function RootLayout({
           </div>
         )}
 
-        {/* Main Content */}
         <main className='flex-grow overflow-y-auto'>{children}</main>
 
-        {/* Bottom Navigation Bar - Exactly matching the screenshot */}
         <nav className='bg-white border-t border-gray-200 z-10'>
           <div className='flex items-center justify-around h-14 px-2'>
-            {/* Home (Graph/Chart Icon) */}
-            <button
-              onClick={() => handleTabChange('home')}
-              className={`flex items-center justify-center h-full ${
-                activeTab === 'home' ? 'text-green-500' : 'text-gray-400'
-              }`}
-            >
-              <svg
-                className='w-6 h-6'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
+            <Link href='/'>
+              <button
+                onClick={() => handleTabChange('home')}
+                className={`flex items-center justify-center h-full ${
+                  activeTab === 'home' ? 'text-green-500' : 'text-gray-400'
+                }`}
               >
-                <path d='M3 12l3-3 3 3 6-6 6 6' />
-              </svg>
-            </button>
+                <svg
+                  className='w-6 h-6'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                >
+                  <path d='M3 12l3-3 3 3 6-6 6 6' />
+                </svg>
+              </button>
+            </Link>
 
-            {/* Search */}
             <button
               onClick={() => handleTabChange('search')}
               className={`flex items-center justify-center h-full ${
@@ -103,7 +100,6 @@ export default function RootLayout({
               </svg>
             </button>
 
-            {/* Notifications Bell */}
             <button
               onClick={() => handleTabChange('notifications')}
               className={`flex items-center justify-center h-full ${
@@ -123,7 +119,6 @@ export default function RootLayout({
               </svg>
             </button>
 
-            {/* Favorites (Heart) */}
             <button
               onClick={() => handleTabChange('favorites')}
               className={`flex items-center justify-center h-full ${
@@ -141,7 +136,6 @@ export default function RootLayout({
               </svg>
             </button>
 
-            {/* Profile (Person) */}
             <Link href='/profile'>
               <button
                 onClick={() => handleTabChange('profile')}

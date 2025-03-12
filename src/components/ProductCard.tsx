@@ -29,7 +29,6 @@ export const ProductCard = ({ product }: { product: Product }) => {
           aria-label='Product Tile Link'
           className='block outline-offset-[-1px]'
         >
-          {/* Product Image */}
           <div className='relative bg-white rounded-lg'>
             <div className='relative pb-[70%]'>
               <Image
@@ -45,7 +44,6 @@ export const ProductCard = ({ product }: { product: Product }) => {
           </div>
         </Link>
 
-        {/* Heart Icon */}
         <button
           type='button'
           className='absolute top-2 right-2 w-10 h-10 rounded-full bg-white flex items-center justify-center'
@@ -59,7 +57,6 @@ export const ProductCard = ({ product }: { product: Product }) => {
           </svg>
         </button>
 
-        {/* Product Details - in a flex-grow container */}
         <div className='p-3 text-black flex-grow'>
           <h3 className='text-sm font-medium truncate mb-1'>{product.title}</h3>
 
@@ -74,7 +71,6 @@ export const ProductCard = ({ product }: { product: Product }) => {
             </p>
           )}
         </div>
-
       </div>
     </li>
   );

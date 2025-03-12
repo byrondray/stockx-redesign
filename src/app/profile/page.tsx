@@ -2,6 +2,15 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 
 export default function PortfolioPage() {
   const [sortOrder, setSortOrder] = useState('default');
@@ -53,6 +62,44 @@ export default function PortfolioPage() {
     },
   ];
 
+  const generateHistoricalData = () => {
+    const months = ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'];
+
+    const marketEvents = [
+      { month: 1, impact: 0.15 },
+      { month: 2, impact: -0.1 },
+      { month: 4, impact: 0.08 },
+    ];
+
+    const baselineTotalValue = portfolioItems.reduce((sum, item) => {
+      return sum + parseInt(item.marketValue.replace(/[^0-9]/g, ''));
+    }, 0);
+
+    let previousValue = baselineTotalValue * 0.92;
+
+    return months.map((month, index) => {
+      const randomFactor = 1 + (Math.random() * 0.15 - 0.07);
+
+      const event = marketEvents.find((e) => e.month === index);
+      const eventFactor = event ? 1 + event.impact : 1;
+
+      let newValue = previousValue * randomFactor * eventFactor;
+
+      newValue = newValue * (1 + index * 0.01);
+
+      newValue = Math.round(newValue);
+
+      previousValue = newValue;
+
+      return {
+        name: month,
+        totalValue: newValue,
+      };
+    });
+  };
+
+  const chartData = generateHistoricalData();
+
   const sortedItems = [...portfolioItems].sort((a, b) => {
     if (sortOrder === 'value-high') {
       return (
@@ -62,7 +109,7 @@ export default function PortfolioPage() {
     } else if (sortOrder === 'value-low') {
       return (
         parseFloat(a.marketValue.replace(/[^0-9.-]+/g, '')) -
-        parseFloat(b.marketValue.replace(/[^0-9.-]+/g, ''))
+        parseFloat(a.marketValue.replace(/[^0-9.-]+/g, ''))
       );
     } else if (sortOrder === 'name-az') {
       return a.brand.localeCompare(b.brand);
@@ -72,7 +119,7 @@ export default function PortfolioPage() {
     return 0;
   });
 
-  const toggleSort = (type: string) => {
+  const toggleSort = (type: any) => {
     if (type === 'item') {
       setSortOrder(sortOrder === 'name-az' ? 'name-za' : 'name-az');
     } else if (type === 'value') {
@@ -82,10 +129,9 @@ export default function PortfolioPage() {
 
   return (
     <div className='flex flex-col h-full bg-white'>
-      {/* Header */}
       <header className='relative px-4 py-3 border-b border-gray-200'>
         <div className='flex items-center'>
-          <Link href='/account' className='absolute left-4'>
+          <Link href='/' className='absolute left-4'>
             <svg
               className='w-6 h-6'
               viewBox='0 0 24 24'
@@ -113,7 +159,39 @@ export default function PortfolioPage() {
         </div>
       </header>
 
-      {/* Sort headers */}
+      <div className='px-4 py-3 border-b border-gray-200'>
+        <h2 className='text-base font-medium mb-2 text-black'>Value History</h2>
+        <div className='h-64 w-full'>
+          <ResponsiveContainer width='100%' height='100%'>
+            <LineChart
+              data={chartData}
+              margin={{
+                top: 5,
+                right: 5,
+                left: 0,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray='3 3' opacity={0.2} />
+              <XAxis dataKey='name' />
+              <YAxis />
+              <Tooltip
+                formatter={(value) => [`CA$${value}`, 'Portfolio Value']}
+                labelFormatter={(label) => `Month: ${label}`}
+              />
+              <Line
+                type='monotone'
+                dataKey='totalValue'
+                stroke='#2563eb'
+                strokeWidth={2}
+                dot={{ fill: '#2563eb', r: 4 }}
+                activeDot={{ r: 8 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
       <div className='flex justify-between items-center px-4 py-3 border-b border-gray-200'>
         <button
           className='flex items-center font-medium text-black'
@@ -134,6 +212,7 @@ export default function PortfolioPage() {
             />
           </svg>
         </button>
+
         <button
           className='flex items-center font-medium text-black'
           onClick={() => toggleSort('value')}
@@ -155,7 +234,6 @@ export default function PortfolioPage() {
         </button>
       </div>
 
-      {/* Portfolio items list */}
       <div className='flex-1 overflow-y-auto'>
         {sortedItems.map((item) => (
           <div

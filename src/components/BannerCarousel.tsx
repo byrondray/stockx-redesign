@@ -1,8 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import React, { useState } from 'react';
 
 const bannerItems = [
   {
@@ -13,18 +11,17 @@ const bannerItems = [
     alt: 'Supreme $5 Seller Fee Global Promo',
     openInNewTab: true,
   },
-  // You can add more banner items here for the carousel functionality
   {
     id: 2,
     href: '/latest-drops',
-    imgSrc: '/banner-latest-drops.jpg', // Replace with actual image path
+    imgSrc: '/banner-latest-drops.jpg',
     alt: 'Check out the latest drops',
     openInNewTab: false,
   },
   {
     id: 3,
     href: '/sneaker-deals',
-    imgSrc: '/banner-sneaker-deals.jpg', // Replace with actual image path
+    imgSrc: '/banner-sneaker-deals.jpg',
     alt: 'Hot sneaker deals this week',
     openInNewTab: false,
   },
@@ -32,15 +29,6 @@ const bannerItems = [
 
 export default function BannerCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Auto-rotate functionality
-  //   useEffect(() => {
-  //     const interval = setInterval(() => {
-  //       setCurrentSlide((prevSlide) => (prevSlide + 1) % bannerItems.length);
-  //     }, 5000); // Change slide every 5 seconds
-
-  //     return () => clearInterval(interval);
-  //   }, []);
 
   const nextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % bannerItems.length);
@@ -97,7 +85,6 @@ export default function BannerCarousel() {
         ))}
       </div>
 
-      {/* Navigation Dots */}
       <div className='absolute bottom-4 left-0 right-0 flex justify-center gap-2'>
         {bannerItems.map((_, index) => (
           <button
@@ -111,7 +98,6 @@ export default function BannerCarousel() {
         ))}
       </div>
 
-      {/* Navigation Arrows - Add these if you want arrow navigation */}
       <button
         className='absolute left-2 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/50 rounded-full hidden md:flex items-center justify-center text-white'
         onClick={prevSlide}
