@@ -119,7 +119,7 @@ export default function PortfolioPage() {
     return 0;
   });
 
-  const toggleSort = (type: any) => {
+  const toggleSort = (type: string) => {
     if (type === 'item') {
       setSortOrder(sortOrder === 'name-az' ? 'name-za' : 'name-az');
     } else if (type === 'value') {
